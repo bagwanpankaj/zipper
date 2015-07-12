@@ -39,9 +39,16 @@ By default it uses `google` shortener services, but one can mention other availa
 
 4.) bit.do
 
+5.) spi.to - this supports expiration of the links too
+
 service can be specified with `-s` flag, as
 
     zipper -u http://bagwanpankaj.com -s isgd
+
+and the expiration can be set using the `-exp` flag. The example below sets the expiration to 1 hour, after which the link will be invalid.
+
+    zipper -u http://spi.to -s spito -exp 3600
+
 
 ## Copyright
 
