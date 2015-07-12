@@ -3,10 +3,11 @@ package main;
 import(
   "flag"
   "fmt"
-  "./google"
-  "./bitdo"
-  "./isgd"
-  "./vgd"
+  
+  "github.com/bagwanpankaj/zipper/google"
+  "github.com/bagwanpankaj/zipper/bitdo"
+  "github.com/bagwanpankaj/zipper/isgd"
+  "github.com/bagwanpankaj/zipper/vgd"
 )
 
 func main(){
