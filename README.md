@@ -32,8 +32,11 @@ Alternatively, one can install it
 By default it uses `google` shortener services, but one can mention other available services. For now zipper supports four services
 
 1.) Is.gd
+
 2.) v.gd
+
 3.) googl
+
 4.) bit.do
 
 service can be specified with `-s` flag, as
