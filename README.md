@@ -10,9 +10,24 @@ Zipper is a experimental url shortener client for terminal
 
 ### How to use
 
-To use `zipper`, just use binary supplied in `bin` directory. Executable can also be copied to local binary path, and use directly
+To use `zipper`:
 
-    ./bin/zipper -u http://bagwanpankaj.com
+1.) Clone Zipper
+
+    git clone git@github.com:bagwanpankaj/zipper.git
+
+2.) Install 
+
+    cd zipper
+    go run zipper.go -u http://example.com -s google -k <api-key-for-goo.gl>
+
+Alternatively, one can install it
+
+    go install zipper.go // will need GOBIN to already set up
+
+  then use it
+
+    zipper -u http://example.com -s is.gd
 
 By default it uses `google` shortener services, but one can mention other available services. For now zipper supports four services
 
@@ -23,8 +38,8 @@ By default it uses `google` shortener services, but one can mention other availa
 
 service can be specified with `-s` flag, as
 
-    ./bin/zipper -u http://bagwanpankaj.com -s isgd
+    zipper -u http://bagwanpankaj.com -s isgd
 
 ## Copyright
 
-Copyright (c) 2012-2014 [Bagwan Pankaj]. See LICENSE.txt for further details.
+Copyright (c) 2012-2015 [Bagwan Pankaj]. See LICENSE.txt for further details.

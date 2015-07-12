@@ -3,21 +3,22 @@ package main;
 import(
   "flag"
   "fmt"
-  "zipper/google"
-  "zipper/bitdo"
-  "zipper/isgd"
-  "zipper/vgd"
+  "./google"
+  "./bitdo"
+  "./isgd"
+  "./vgd"
 )
 
 func main(){
 
   var s = flag.String("s", "google", "specify service to use")
   var u = flag.String("u", "http://xyz.com", "specify url to shorten")
+  var k = flag.String("k", "api key for google url shortner", "specify api key")
   flag.Parse()
 
   switch *s {
     case "google":
-      resp, err := google.Shorten(*u)
+      resp, err := google.Shorten(*u, *k)
       if err != nil{
         panic(err)
       }
@@ -41,7 +42,7 @@ func main(){
       }
       fmt.Println(vgdr)
     default:
-      resp, err := google.Shorten(*u)
+      resp, err := google.Shorten(*u, *k)
       if err != nil{
         panic(err)
       }
