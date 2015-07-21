@@ -1,16 +1,17 @@
 package isgd
 
-import(
-  "net/url"
-  "net/http"
+import (
   "io/ioutil"
+  "net/http"
+  "net/url"
   // "bytes"
-  "errors"
   "encoding/json"
+  "errors"
   // "fmt"
 )
+
 func Shorten(longUrl string) (string, error) {
-// func main(){
+  // func main(){
 
   client := &http.Client{}
 
@@ -18,24 +19,24 @@ func Shorten(longUrl string) (string, error) {
   parameters.Add("format", "json")
   parameters.Add("url", longUrl)
 
-  req, err := http.NewRequest("GET", "http://is.gd/create.php?" + parameters.Encode(), nil)
-  if err != nil{
+  req, err := http.NewRequest("GET", "http://is.gd/create.php?"+parameters.Encode(), nil)
+  if err != nil {
     return "", err
   }
   resp, err := client.Do(req)
-  if(resp.StatusCode != 200){
+  if resp.StatusCode != 200 {
     return "", errors.New(resp.Status)
   }
   defer resp.Body.Close()
   body, err := ioutil.ReadAll(resp.Body)
   // fmt.Println(string(body))
-  if(err != nil){
+  if err != nil {
     return "", err
   }
 
   var f interface{}
   err = json.Unmarshal(body, &f)
-  if(err != nil){
+  if err != nil {
     return "", err
   }
   // fmt.Println(f)

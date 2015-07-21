@@ -1,14 +1,15 @@
 package bitdo
 
-import(
-  "net/url"
-  "net/http"
-  "io/ioutil"
+import (
   "bytes"
-  "errors"
   "encoding/json"
+  "errors"
+  "io/ioutil"
+  "net/http"
+  "net/url"
   // "fmt"
 )
+
 func Shorten(longUrl string) (string, error) {
 
   client := &http.Client{}
@@ -18,24 +19,24 @@ func Shorten(longUrl string) (string, error) {
   parameters.Add("url_hash", "")
   parameters.Add("url", longUrl)
 
-  req, err := http.NewRequest("POST", "http://bit.do/mod_perl/url-shortener.pl", 
+  req, err := http.NewRequest("POST", "http://bit.do/mod_perl/url-shortener.pl",
     bytes.NewBufferString(parameters.Encode()))
-  if err != nil{
+  if err != nil {
     return "", err
   }
   resp, err := client.Do(req)
-  if(resp.StatusCode != 200){
+  if resp.StatusCode != 200 {
     return "", errors.New(resp.Status)
   }
   defer resp.Body.Close()
   body, err := ioutil.ReadAll(resp.Body)
-  if(err != nil){
+  if err != nil {
     return "", err
   }
 
   var f interface{}
   err = json.Unmarshal(body, &f)
-  if(err != nil){
+  if err != nil {
     return "", err
   }
   // {"url_hash":"jmot"}
