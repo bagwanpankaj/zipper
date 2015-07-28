@@ -1,18 +1,17 @@
+// Package isgd provides wrapper for url shortener services provided by `is.gd`
 package isgd
 
 import (
   "io/ioutil"
   "net/http"
   "net/url"
-  // "bytes"
   "encoding/json"
   "errors"
-  // "fmt"
 )
 
+// Shorten calls to shortener services with data provided and returns string
+// containing shortened url and error (if any)
 func Shorten(longUrl string) (string, error) {
-  // func main(){
-
   client := &http.Client{}
 
   parameters := url.Values{}
@@ -29,7 +28,6 @@ func Shorten(longUrl string) (string, error) {
   }
   defer resp.Body.Close()
   body, err := ioutil.ReadAll(resp.Body)
-  // fmt.Println(string(body))
   if err != nil {
     return "", err
   }
@@ -39,7 +37,6 @@ func Shorten(longUrl string) (string, error) {
   if err != nil {
     return "", err
   }
-  // fmt.Println(f)
   urlHash := f.(map[string]interface{})
   // shortUrl := urlHash["shorturl"]
   return urlHash["shorturl"].(string), nil

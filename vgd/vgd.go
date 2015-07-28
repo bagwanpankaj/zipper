@@ -1,15 +1,16 @@
+// Package vgd provides wrapper for url shortener services provided by `v.gd`
 package vgd
 
 import (
   "io/ioutil"
   "net/http"
   "net/url"
-  // "bytes"
   "encoding/json"
   "errors"
-  // "fmt"
 )
 
+// Shorten calls to shortener services with data provided and returns string
+// containing shortened url and error (if any)
 func Shorten(longUrl string) (string, error) {
 
   client := &http.Client{}

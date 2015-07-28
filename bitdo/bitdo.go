@@ -1,3 +1,4 @@
+// Package bitdo provides wrapper for url shortener services provided by `bitdo`
 package bitdo
 
 import (
@@ -7,9 +8,10 @@ import (
   "io/ioutil"
   "net/http"
   "net/url"
-  // "fmt"
 )
 
+// Shorten calls to shortener services with data provided and returns string
+// containing shortened url and error (if any)
 func Shorten(longUrl string) (string, error) {
 
   client := &http.Client{}

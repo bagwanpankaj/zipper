@@ -1,3 +1,4 @@
+// Package google provides wrapper for url shortener services provided by `goo.gl`
 package google
 
 import (
@@ -8,6 +9,8 @@ import (
   "net/http"
 )
 
+// Shorten calls to shortener services with data provided and returns string
+// containing shortened url and error (if any)
 func Shorten(url, key string) (string, error) {
   client := &http.Client{}
   req, err := http.NewRequest("POST", "https://www.googleapis.com/urlshortener/v1/url?key="+key,

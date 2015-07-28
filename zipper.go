@@ -1,51 +1,41 @@
-package main
+// Package zipper provides high level function to for url shortener services
+// It depends on `bitdo`, `google`, `isgd` and `vgd`
+package zipper
 
 import (
-  "./bitdo"
-  "./google"
-  "./isgd"
-  "./vgd"
-  "flag"
-  "fmt"
+  "github.com/bagwanpankaj/zipper/bitdo"
+  "github.com/bagwanpankaj/zipper/google"
+  "github.com/bagwanpankaj/zipper/isgd"
+  "github.com/bagwanpankaj/zipper/vgd"
 )
 
-func main() {
+// Zipper is a construct that is to hold several variables required
+// for sorting a url by service
+type Zipper struct {
+  Service string
+  Url     string
+  ApiKey  string
+}
 
-  var s = flag.String("s", "google", "specify service to use")
-  var u = flag.String("u", "http://xyz.com", "specify url to shorten")
-  var k = flag.String("k", "api key for google url shortner", "specify api key")
-  flag.Parse()
+// New initializes Zipper with required data to call shortener services
+// and returns a Zipper pointer
+func New(s, u, k interface{}) *Zipper {
+  return &Zipper{ Service: s.(string), Url: u.(string), ApiKey: k.(string) }
+}
 
-  switch *s {
+// Shorten calls to shortener services with data provided and returns string
+// containing shortened url and error (if any)
+func (z *Zipper) Shorten()(string, error){
+  switch z.Service{
   case "google":
-    resp, err := google.Shorten(*u, *k)
-    if err != nil {
-      panic(err)
-    }
-    fmt.Println(resp)
+    return google.Shorten(z.Url, z.ApiKey)
   case "bitdo":
-    respb, errr := bitdo.Shorten(*u)
-    if errr != nil {
-      panic(errr)
-    }
-    fmt.Println(respb)
+    return bitdo.Shorten(z.Url)
   case "isgd":
-    isgdr, isgderr := isgd.Shorten(*u)
-    if isgderr != nil {
-      panic(isgderr)
-    }
-    fmt.Println(isgdr)
+    return isgd.Shorten(z.Url)
   case "vgd":
-    vgdr, vgderr := vgd.Shorten(*u)
-    if vgderr != nil {
-      panic(vgderr)
-    }
-    fmt.Println(vgdr)
+    return vgd.Shorten(z.Url)
   default:
-    resp, err := google.Shorten(*u, *k)
-    if err != nil {
-      panic(err)
-    }
-    fmt.Println(resp)
+    return google.Shorten(z.Url, z.ApiKey)
   }
 }
