@@ -20,13 +20,13 @@ type Zipper struct {
 // New initializes Zipper with required data to call shortener services
 // and returns a Zipper pointer
 func New(s, u, k interface{}) *Zipper {
-  return &Zipper{ Service: s.(string), Url: u.(string), ApiKey: k.(string) }
+  return &Zipper{Service: s.(string), Url: u.(string), ApiKey: k.(string)}
 }
 
 // Shorten calls to shortener services with data provided and returns string
 // containing shortened url and error (if any)
-func (z *Zipper) Shorten()(string, error){
-  switch z.Service{
+func (z *Zipper) Shorten() (string, error) {
+  switch z.Service {
   case "google":
     return google.Shorten(z.Url, z.ApiKey)
   case "bitdo":

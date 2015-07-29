@@ -2,11 +2,11 @@
 package isgd
 
 import (
+  "encoding/json"
+  "errors"
   "io/ioutil"
   "net/http"
   "net/url"
-  "encoding/json"
-  "errors"
 )
 
 // Shorten calls to shortener services with data provided and returns string

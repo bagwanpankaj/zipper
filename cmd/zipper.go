@@ -1,6 +1,6 @@
 package main
 
-import(
+import (
   "flag"
   "fmt"
   "github.com/bagwanpankaj/zipper"
@@ -16,7 +16,7 @@ func main() {
   z := zipper.New(*s, *u, *k)
 
   res, err := z.Shorten()
-  if err != nil{
+  if err != nil {
     panic(err)
   }
   fmt.Println(res)
